@@ -4,7 +4,7 @@
 </head>
 <body>
 <h1>Mediaservarr</h1>
-<p>In here you'll find my Personal Configuration of various <a href="wiki.servarr.com/">*arr</a> Docker Containers.
+<p>In here you'll find my Personal Configuration of various <a href="wiki.servarr.com/">*arr</a> & other Homeserver Docker Containers.
  Note that some Container Tags are not device agnostic.
   Read the compose files carefully!
   </p>
