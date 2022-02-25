@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Mediaservarr</title>
 </head>
 <body>
-
+<title>Mediaservarr</title>
 <h1>This is a Heading</h1>
 <p>This is a paragraph.</p>
 
