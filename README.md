@@ -1,6 +1,12 @@
-<h1> ### Mediaswarrm ### <h1>
-Homeserver Configs for *arr &amp; other Media containers running on Swarm
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mediaservarr</title>
+</head>
+<body>
 
-Please Note that some things in here are not device agnostic:
--Some Docker Images dont use the :latest tag
--Data Paths ( you can copy my /data/~ Folder Structure )
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+
+</body>
+</html> 
