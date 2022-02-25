@@ -3,9 +3,11 @@
 <head>
 </head>
 <body>
-<title>Mediaservarr</title>
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
+<h1>Mediaservarr</h1>
+<p>In here you'll find my Personal Configuration of various <a href="wiki.servarr.com/">*arr</a> Docker Containers.
+ Note that some Container Tags are not device agnostic.
+  Read the compose files carefully!
+  </p>
 
 </body>
 </html> 
