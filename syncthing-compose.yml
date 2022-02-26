@@ -9,8 +9,8 @@ services:
       - TZ=${TZ} # timezone, defined in .env
     volumes:
       - ${ROOTNAS}/syncthing/config:/config # config files
-      - ${ROOTNAS}/downloads:/data1 # First Data Folder / NAS in my Case
-      - ${ROOTHDD}/complete:/data2 # Second Data Folder / Media Library HDD in my Case 
+      - ${ROOTNAS}/:/nas # First Data Folder / NAS in my Case
+      - ${ROOTHDD}/complete:/hdd # Second Data Folder / Media Library HDD in my Case 
     network_mode: ${NETWORKMODE} 
     ports:
       - 8384:8384
