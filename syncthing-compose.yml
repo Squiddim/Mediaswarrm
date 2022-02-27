@@ -19,7 +19,7 @@ services:
     container_name: deluge
     image: linuxserver/deluge:latest
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
+   # network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -28,14 +28,22 @@ services:
       - ${ROOTHDD}/downloads:/downloads # downloads folder
       - ${ROOT}/config/deluge:/config # config files
     ports:
-      - 8112:8112
-      - 5846:5846
+      - target: 8112
+        published: 8112
+        protocol: tcp 
+        mode: ${MODE}
+
+      - target: 5846
+        published: 5846
+        protocol: tcp 
+        mode: ${MODE}
+
 
   jackett:
     container_name: jackett
     image: linuxserver/jackett:latest
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
+   # network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -45,13 +53,17 @@ services:
       - ${ROOTHDD}/downloads/torrent-blackhole:/downloads # place where to put .torrent files for manual download
       - ${ROOT}/config/jackett:/config # config files
     ports:
-      - 9117:9117
+      - target: 9117
+        published: 9117
+        protocol: tcp 
+        mode: ${MODE}
+
 
   sabnzbd:
     container_name: sabnzbd
     image: linuxserver/sabnzbd
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
+    #network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -60,13 +72,16 @@ services:
       - ${ROOTHDD}/downloads:/downloads # download folder
       - ${ROOT}/config/sabnzbd:/config # config files
     ports:
-      - 6799:8080
+      - target: 8080
+        published: 6799  # ####evtl switcged
+        protocol: tcp 
+        mode: ${MODE}
 
   sonarr:
     container_name: sonarr
     image: linuxserver/sonarr:latest
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
+    #network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -77,13 +92,16 @@ services:
       - ${ROOTHDD}/complete/tv:/tv # tv shows folder
       - ${ROOTHDD}/downloads:/downloads # download folder
     ports:
-      - 8989:8989
+      - target: 8989
+        published: 8989
+        protocol: tcp 
+        mode: ${MODE}
 
   radarr:
     container_name: radarr
     image: linuxserver/radarr:latest
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
+    #network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -94,13 +112,17 @@ services:
       - ${ROOTHDD}/complete/movies:/movies # movies folder
       - ${ROOTHDD}/downloads:/downloads # download folder
     ports:
-      - 7878:7878
+      - target: 7878
+        published: 7878
+        protocol: tcp 
+        mode: ${MODE}
+
 
   plex-server:
     container_name: plex-server
     image: linuxserver/plex:${PLEXTAG}
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
+
     environment:
       - TZ=${TZ} # timezone, defined in .env
     volumes:
@@ -109,13 +131,16 @@ services:
       - ${ROOTHDD}/complete:/data # media library
       - ${ROOTNAS}/music:/music # music
     ports:
-      - 32400:32400
+      - target: 32400
+        published: 32400
+        protocol: tcp 
+        mode: ${MODE}
 
   bazarr:
     container_name: bazarr
     image: linuxserver/bazarr
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
+    #network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -126,13 +151,17 @@ services:
       - ${ROOTHDD}/complete/movies:/movies # movies folder
       - ${ROOTHDD}/complete/tv:/tv # tv shows folder
     ports:
-      - 6767:6767
+      - target: 6767
+        published: 6767
+        protocol: tcp 
+        mode: ${MODE}
+
       
   prowlarr:
     container_name: prowlarr
     image: linuxserver/prowlarr:nightly
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
+    #network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -140,13 +169,17 @@ services:
     volumes:
       - ${ROOT}/config/prowlarr:/config # config files
     ports:
-      - 9696:9696
+      - target: 9696
+        published: 9696
+        protocol: tcp 
+        mode: ${MODE}
+
       
   lidarr:
     container_name: lidarr
     image: linuxserver/lidarr:nightly
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
+    #network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -156,13 +189,17 @@ services:
       - ${ROOTHDD}/complete/music:/music # music folder
       - ${ROOTHDD}/downloads:/downloads # download shows folder
     ports:
-      - 8686:8686
+      - target: 8686
+        published: 8686
+        protocol: tcp 
+        mode: ${MODE}
+
       
   readarr:
     container_name: readarr
     image: linuxserver/readarr:nightly
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
+    #network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -172,5 +209,9 @@ services:
       - ${ROOTHDD}/complete/books:/books # music folder
       - ${ROOTHDD}/downloads:/downloads # download shows folder
     ports:
-      - 8787:8787
+      - target: 8787
+        published: 8787
+        protocol: tcp 
+        mode: ${MODE}
+
 
