@@ -16,157 +16,195 @@ services:
     #command: '-f "" -r 192.168.1.0/24' # enable firewall and route local network traffic
 
   deluge:
-    container_name: deluge
+   # container_name: deluge
     image: linuxserver/deluge:latest
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
-      - ${ROOTHDD}/downloads:/downloads # downloads folder
-      - ${ROOT}/config/deluge:/config # config files
+      - ${NAS}/downloads:/downloads # downloads folder
+      - ${NAS}/config/deluge:/config # config files
     ports:
-      - 8112:8112
-      - 5846:5846
+      - target: 8112
+        published: 8112
+        protocol: tcp 
+        mode: ${MODE}
+
+      - target: 5846
+        published: 5846
+        protocol: tcp 
+        mode: ${MODE}
+
 
   jackett:
-    container_name: jackett
+   # container_name: jackett
     image: linuxserver/jackett:latest
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${ROOTHDD}/downloads/torrent-blackhole:/downloads # place where to put .torrent files for manual download
-      - ${ROOT}/config/jackett:/config # config files
+      - ${NAS}/downloads/torrent-blackhole:/downloads # place where to put .torrent files for manual download
+      - ${NAS}/config/jackett:/config # config files
     ports:
-      - 9117:9117
+      - target: 9117
+        published: 9117
+        protocol: tcp 
+        mode: ${MODE}
 
-  #nzbget:
-    #container_name: nzbget
-    #image: linuxserver/nzbget:latest
-    #restart: unless-stopped
-    #network_mode: ${NETWORKMODE}
-    #environment:
-    #  - PUID=${PUID} # default user id, defined in .env
-    #  - PGID=${PGID} # default group id, defined in .env
-    #  - TZ=${TZ} # timezone, defined in .env
-    #volumes:
-    #  - ${ROOTHDD}/downloads:/downloads # download folder
-    #  - ${ROOT}/config/nzbget:/config # config files
+
+  sabnzbd:
+   # container_name: sabnzbd
+    image: linuxserver/sabnzbd
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${NAS}/downloads:/downloads # download folder
+      - ${NAS}/config/sabnzbd:/config # config files
+    ports:
+      - target: 8080
+        published: 6799  # ####evtl switcged
+        protocol: tcp 
+        mode: ${MODE}
 
   sonarr:
-    container_name: sonarr
+   # container_name: sonarr
     image: linuxserver/sonarr:latest
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${ROOT}/config/sonarr:/config # config files
-      - ${ROOTHDD}/complete/tv:/tv # tv shows folder
-      - ${ROOTHDD}/downloads:/downloads # download folder
+      - ${NAS}/config/sonarr:/config # config files
+      - ${NAS}/complete/tv:/tv # tv shows folder
+      - ${NAS}/downloads:/downloads # download folder
     ports:
-      - 8989:8989
+      - target: 8989
+        published: 8989
+        protocol: tcp 
+        mode: ${MODE}
 
   radarr:
-    container_name: radarr
+   # container_name: radarr
     image: linuxserver/radarr:latest
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${ROOT}/config/radarr:/config # config files
-      - ${ROOTHDD}/complete/movies:/movies # movies folder
-      - ${ROOTHDD}/downloads:/downloads # download folder
+      - ${NAS}/config/radarr:/config # config files
+      - ${NAS}/complete/movies:/movies # movies folder
+      - ${NAS}/downloads:/downloads # download folder
     ports:
-      - 7878:7878
+      - target: 7878
+        published: 7878
+        protocol: tcp 
+        mode: ${MODE}
+
 
   plex-server:
-    container_name: plex-server
+  #  container_name: plex-server
     image: linuxserver/plex:${PLEXTAG}
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
     environment:
       - TZ=${TZ} # timezone, defined in .env
     volumes:
-      - ${ROOT}/config/plex/db:/config # plex database
-      - ${ROOTHDD}/plextranscode:/transcode # temp transcoded files
-      - ${ROOTHDD}/complete:/data # media library
+      - ${NAS}/config/plex/db:/config # plex database
+      - ${NAS}/plextranscode:/transcode # temp transcoded files
+      - ${NAS}/complete:/data # media library
+      - ${NAS}/complete/music:/music # music
     ports:
-      - 32400:32400
+      - target: 32400
+        published: 32400
+        protocol: tcp 
+        mode: ${MODE}
 
   bazarr:
-    container_name: bazarr
+   # container_name: bazarr
     image: linuxserver/bazarr
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
       - UMASK_SET=022 #optional
     volumes:
-      - ${ROOT}/config/bazarr:/config # config files
-      - ${ROOTHDD}/complete/movies:/movies # movies folder
-      - ${ROOTHDD}/complete/tv:/tv # tv shows folder
+      - ${NAS}/config/bazarr:/config # config files
+      - ${NAS}/complete/movies:/movies # movies folder
+      - ${NAS}/complete/tv:/tv # tv shows folder
     ports:
-      - 6767:6767
+      - target: 6767
+        published: 6767
+        protocol: tcp 
+        mode: ${MODE}
+
       
   prowlarr:
-    container_name: prowlarr
+  #  container_name: prowlarr
     image: linuxserver/prowlarr:nightly
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
-      - ${ROOT}/config/prowlarr:/config # config files
+      - ${NAS}/config/prowlarr:/config # config files
     ports:
-      - 9696:9696
+      - target: 9696
+        published: 9696
+        protocol: tcp 
+        mode: ${MODE}
+
       
   lidarr:
-    container_name: lidarr
+  #  container_name: lidarr
     image: linuxserver/lidarr:nightly
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
-      - ${ROOT}/config/lidarr:/config # config files
-      - ${ROOTHDD}/complete/music:/music # music folder
-      - ${ROOTHDD}/downloads:/downloads # download shows folder
+      - ${NAS}/config/lidarr:/config # config files
+      - ${NAS}/complete/music:/music # music folder
+      - ${NAS}/downloads:/downloads # download shows folder
     ports:
-      - 8686:8686
+      - target: 8686
+        published: 8686
+        protocol: tcp 
+        mode: ${MODE}
+
       
   readarr:
-    container_name: readarr
+   # container_name: readarr
     image: linuxserver/readarr:nightly
     restart: unless-stopped
-    network_mode: ${NETWORKMODE}
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
-      - ${ROOT}/config/readarr:/config # config files
-      - ${ROOTHDD}/complete/books:/books # music folder
-      - ${ROOTHDD}/downloads:/downloads # download shows folder
+      - ${NAS}/config/readarr:/config # config files
+      - ${NAS}/complete/books:/books # music folder
+      - ${NAS}/downloads:/downloads # download shows folder
     ports:
-      - 8787:8787
+      - target: 8787
+        published: 8787
+        protocol: tcp 
+        mode: ${MODE}
+        
+
+  
+
+
