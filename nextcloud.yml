@@ -1,9 +1,5 @@
 version: '3.6'
 
-volumes:
-  nextcloud:
-  db:
-
 services:
   db:
     image: mariadb
