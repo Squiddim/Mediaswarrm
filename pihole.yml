@@ -5,11 +5,6 @@ version: "3.6"
 services:
   pihole:
     image: pihole/pihole:latest
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp"
-      - "8081:80/tcp"
     environment:
       - TZ=${TZ} # timezone, defined in .env
       - WEBPASSWORD=YourPassword     #set a secure password here or it will be random
@@ -20,3 +15,20 @@ services:
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
+    ports:
+      - target: 53  
+        published: 53  
+        protocol: tcp 
+        mode: ${MODE}
+      - target: 53  
+        published: 53  
+        protocol: udp
+        mode: ${MODE}
+      - target: 67  
+        published: 67  
+        protocol: udp
+        mode: ${MODE}
+      - target: 8081   # I use 8081 on my host cause i want nextcloud on 8080
+        published: 80  
+        protocol: tcp 
+        mode: ${MODE}
