@@ -1,7 +1,6 @@
 version: "3.4"
 services:
-  #vpn:
-    #container_name: vpn
+  #vpn: # disabled as VPN Routing now gets done somewhere else in my Network
     #image: dperson/openvpn-client:latest
     #cap_add:
     #  - net_admin # required to modify network interfaces
@@ -16,7 +15,6 @@ services:
     #command: '-f "" -r 192.168.1.0/24' # enable firewall and route local network traffic
 
   deluge:
-   # container_name: deluge
     image: linuxserver/deluge:latest
     restart: unless-stopped
     environment:
@@ -58,7 +56,6 @@ services:
 
 
   sabnzbd:
-   # container_name: sabnzbd
     image: linuxserver/sabnzbd
     restart: unless-stopped
     environment:
@@ -75,7 +72,6 @@ services:
         mode: ${MODE}
 
   sonarr:
-   # container_name: sonarr
     image: linuxserver/sonarr:latest
     restart: unless-stopped
     environment:
@@ -94,7 +90,6 @@ services:
         mode: ${MODE}
 
   radarr:
-   # container_name: radarr
     image: linuxserver/radarr:latest
     restart: unless-stopped
     environment:
@@ -113,8 +108,7 @@ services:
         mode: ${MODE}
 
 
-  plex-server:
-  #  container_name: plex-server
+  plex-server: # you could use Jellyfin instead ( FOSS )
     image: linuxserver/plex:${PLEXTAG}
     restart: unless-stopped
     environment:
@@ -131,7 +125,6 @@ services:
         mode: ${MODE}
 
   bazarr:
-   # container_name: bazarr
     image: linuxserver/bazarr
     restart: unless-stopped
     environment:
@@ -151,7 +144,6 @@ services:
 
       
   prowlarr:
-  #  container_name: prowlarr
     image: linuxserver/prowlarr:nightly
     restart: unless-stopped
     environment:
@@ -168,7 +160,6 @@ services:
 
       
   lidarr:
-  #  container_name: lidarr
     image: linuxserver/lidarr:nightly
     restart: unless-stopped
     environment:
@@ -187,7 +178,6 @@ services:
 
       
   readarr:
-   # container_name: readarr
     image: linuxserver/readarr:nightly
     restart: unless-stopped
     environment:
