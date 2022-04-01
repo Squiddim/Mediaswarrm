@@ -37,7 +37,6 @@ services:
 
 
   jackett:
-   # container_name: jackett
     image: linuxserver/jackett:latest
     restart: unless-stopped
     environment:
@@ -108,7 +107,7 @@ services:
         mode: ${MODE}
 
 
-  plex-server: # you could use Jellyfin instead ( FOSS )
+  plex: # you could use Jellyfin instead ( FOSS )
     image: linuxserver/plex:${PLEXTAG}
     restart: unless-stopped
     environment:
