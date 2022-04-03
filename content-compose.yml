@@ -1,5 +1,28 @@
-version: "3.4"
+version: "3"
 services:
+  reverse-proxy:
+    image: traefik:latest
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080" # Webinterface
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  deluge:
+    image: linuxserver/deluge:latest
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    ports:
+      - "8112:8112"
+      - "5846:5846"
+    links:
+      - reverse-proxy
+      
+
   #vpn: # disabled as VPN Routing now gets done somewhere else in my Network
     #image: dperson/openvpn-client:latest
     #cap_add:
@@ -14,7 +37,7 @@ services:
     #  - 8112:8112 # port for deluge web UI to be reachable from local network
     #command: '-f "" -r 192.168.1.0/24' # enable firewall and route local network traffic
 
-  deluge:
+  deluge1:
     image: linuxserver/deluge:latest
     restart: unless-stopped
     environment:
@@ -193,7 +216,20 @@ services:
         protocol: tcp 
         mode: ${MODE}
         
-
-  
+  minecraft:
+    image: linuxserver/minecraft:latest
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${NAS}/config/minecraft:/config # config files
+      - ${NAS}/minecraft:/data # minecraft data
+    ports:
+      - target: 25565
+        published: 25565
+        protocol: tcp 
+        mode: ${MODE}
 
 

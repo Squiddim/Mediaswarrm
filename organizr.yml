@@ -1,0 +1,29 @@
+version: "3"
+services:
+  organizr:
+    image: linuxserver/organizr:latest
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080" # Webinterface
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${ROOT}/config/organizr:/config # config files
+      - ${ROOT}/config/organizr/certs:/certs # certs
+      - ${ROOT}/config/organizr/data:/data # data
+      - ${ROOT}/config/organizr/logs:/logs # logs
+      - ${ROOT}/config/organizr/media:/media # media
+      - ${ROOT}/config/organizr/plugins:/plugins # plugins
+      - ${ROOT}/config/organizr/themes:/themes # themes
+      - ${ROOT}/config/organizr/themes/default:/themes/default # themes/default
+      - ${ROOT}/config/organizr/themes/default/images:/themes/default/images # themes/default/images
+      - ${ROOT}/config/organizr/themes/default/css:/themes/default/css # themes/default/css
+      - ${ROOT}/config/organizr/themes/default/js:/themes/default/js # themes/default/js
+      - ${ROOT}/config/organizr/themes/default/fonts:/themes/default/fonts # themes/default/fonts
+      - ${ROOT}/config/organizr/themes/default/favicon.ico:/themes/default/favicon.ico # themes/default/favicon.ico
+      - ${ROOT}/config/organizr/themes/
