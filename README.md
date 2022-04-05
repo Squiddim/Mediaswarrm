@@ -20,6 +20,12 @@
 </thead>
 <tbody>
 <tr>
+<td>organizr</td>
+<td>linuxserver/organizr:latest</td>
+<td>organizr.yml</td>
+<td>Organizes all my Services in one webpage</td>
+</tr>
+<tr>
 <td>plex</td>
 <td>linuxserver/plex:latest</td>
 <td>content.yml</td>
@@ -35,7 +41,7 @@
 <td>nextcloud</td>
 <td>nextcloud</td>
 <td>nextcloud.yml</td>
-<td></td>
+<td>Nextcloud</td>
 </tr>
 </tbody>
 </table><h3 id="backend">Backend</h3>
