@@ -119,4 +119,9 @@
 </tr>
 </tbody>
 </table><!---&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;-->
+<h2 id="useful-links">Useful Links</h2>
+<ul>
+<li><a href="https://dockerswarm.rocks">dockerswarm.rocks</a></li>
+<li><a href="https://wiki.servarr.com/">*arr Wiki</a></li>
+</ul>
 
