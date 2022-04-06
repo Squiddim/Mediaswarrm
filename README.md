@@ -117,8 +117,14 @@
 <td>content.yml</td>
 <td>Manages Subtitles</td>
 </tr>
+<tr>
+<td>pihole</td>
+<td>pihole/pihole:latest</td>
+<td>pihole.yml</td>
+<td>DNS Level Adblocking</td>
+</tr>
 </tbody>
-</table><!---&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;-->
+</table><!---&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;|  |  |  |  |&#10;-->
 <h2 id="useful-links">Useful Links</h2>
 <ul>
 <li><a href="https://dockerswarm.rocks">dockerswarm.rocks</a></li>
