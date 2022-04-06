@@ -58,6 +58,12 @@
 </thead>
 <tbody>
 <tr>
+<td>traefik</td>
+<td>traefik/traefik:latest</td>
+<td>traefik.yml</td>
+<td>Reverse Proxy</td>
+</tr>
+<tr>
 <td>headscale</td>
 <td>headscale/headscale:latest</td>
 <td>content.yml <br> !! not implemented yet as i have an VPN implemented on my router for now  !!</td>
