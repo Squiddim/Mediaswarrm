@@ -135,5 +135,6 @@
 <ul>
 <li><a href="https://dockerswarm.rocks">dockerswarm.rocks</a></li>
 <li><a href="https://wiki.servarr.com/">*arr Wiki</a></li>
+<li><a href="swizzin.ltd">Swizzin Docs</a></li>
 </ul>
 
