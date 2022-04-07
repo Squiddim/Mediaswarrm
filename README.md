@@ -7,6 +7,8 @@
 <p>In here you’ll find my Personal Configuration of various <a href="https://wiki.servarr.com/">*arr</a> &amp; other Homeserver Docker Containers. My Docker Swarm consists of multiple pies &amp; 1 x86 Host.</p>
 <p>Note that some Container Tags are not device agnostic. Read the compose files carefully!</p>
 <p>Everything you see here is Work in Progress!</p>
+<h2 id="folder-structure">Folder Structure</h2>
+<p>todo</p>
 <h2 id="containers-used">Containers used</h2>
 <h3 id="frontends">Frontend('s)</h3>
 
