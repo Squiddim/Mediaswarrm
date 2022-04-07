@@ -138,5 +138,6 @@
 <li><a href="https://dockerswarm.rocks">dockerswarm.rocks</a></li>
 <li><a href="https://wiki.servarr.com">*arr Wiki</a></li>
 <li><a href="https://swizzin.ltd">Swizzin Docs</a></li>
+<li><a href="https://linuxserver.io">linuxserver.io</a></li>
 </ul>
 
